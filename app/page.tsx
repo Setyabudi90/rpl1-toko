@@ -3,22 +3,7 @@ import { useEffect, useState } from "react";
 import { Data } from "@/types/types";
 import Main from "@/components/Main/index";
 import Footer from "@/components/Footer";
-
-export async function getData(): Promise<Data> {
-  try {
-    const response = await fetch("/data/dishes.json");
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
-
-    const data: Data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-}
+import { getData } from "@/hooks/data";
 
 export default function Home() {
   const [data, setData] = useState<Data | null>(null);
@@ -31,7 +16,7 @@ export default function Home() {
         setData(fetchedData);
       } catch (err) {
         setError("Unable to load data. Please try again later.");
-        console.error(err)
+        console.error(err);
       }
     }
 
