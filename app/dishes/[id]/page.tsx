@@ -1,5 +1,5 @@
 "use client";
-import { getData } from "@/app/page";
+import { getData } from "@/hooks/data";
 import { Dish } from "@/types/types";
 import Image from "next/image";
 import { useEffect, useState, use } from "react";
