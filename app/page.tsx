@@ -31,6 +31,7 @@ export default function Home() {
         setData(fetchedData);
       } catch (err) {
         setError("Unable to load data. Please try again later.");
+        console.error(err)
       }
     }
 
