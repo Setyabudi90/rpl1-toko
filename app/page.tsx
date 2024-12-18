@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { Data } from "@/types/types";
 import Main from "@/components/Main/index";
-import Link from "next/link";
 import Footer from "@/components/Footer";
 
 export async function getData(): Promise<Data> {

@@ -47,9 +47,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       </div>
     );
   }
-
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)");
-
   // Generate stars
   const renderStars = (starCount: number) => {
     const stars = [];

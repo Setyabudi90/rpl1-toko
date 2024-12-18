@@ -12,7 +12,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         cyberpunk: "#1e293b",
-        neonPink: "#ff008",
+        neonPink: "#ff0083",
         neonBlue: "#00ffff",
       },
     },
