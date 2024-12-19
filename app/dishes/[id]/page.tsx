@@ -59,7 +59,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       stars.push(
         <Image
           key={i}
-          src={`${isDark ? "/data/star.svg" : "/data/starsWhite.png"}`}
+          src={`${isDark ? "/data/starsWhite.png" : "/data/star.svg"}`}
           alt="Star"
           width={15}
           height={15}
