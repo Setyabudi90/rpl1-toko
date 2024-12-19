@@ -10,6 +10,8 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const [dish, setDish] = useState<Dish | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [name, setName] = useState<string>("");
+  const [kelas, setKelas] = useState<string>("");
   const router = useRouter();
 
   useEffect(() => {
@@ -47,6 +49,9 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       </div>
     );
   }
+
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
   // Generate stars
   const renderStars = (starCount: number) => {
     const stars = [];
@@ -56,8 +61,8 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           key={i}
           src={"/data/starsWhite.png"}
           alt="Star"
-          width={24}
-          height={24}
+          width={15}
+          height={15}
           className="inline-block"
         />
       );
@@ -95,16 +100,41 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           {renderStars(dish.star || 0)}
         </div>
       </div>
+      {dish.detail && <span className="font-bold text-xl">{dish.detail}</span>}
+      <div className="w-full flex flex-col space-y-4 mt-4">
+        <input
+          type="text"
+          placeholder="Nama (Required)"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="p-2 border rounded-md text-white bg-transparent"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Kelas (Optional) Kosongkan ndak papa"
+          value={kelas}
+          onChange={(e) => setKelas(e.target.value)}
+          className="p-2 border rounded-md text-white bg-transparent"
+        />
+      </div>
       <Link
         href={`https://wa.me/6281357379636?text=${encodeURIComponent(
-          "Halo! Saya ingin membeli " +
-            dish.name +
-            " dengan harga " +
+          `Halo! Saya ingin membeli ${dish.name} dengan harga ${
             dish.price
+          }.\nNama: ${name}\nKelas: ${kelas || "-"}`
         )}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="bottom-0 relative flex w-full items-center justify-between bg-slate-600 p-3 rounded text-white"
+        className={`bottom-0 relative flex w-full items-center justify-between bg-slate-600 p-3 rounded text-white ${
+          !name.trim() ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        onClick={(e) => {
+          if (!name.trim()) {
+            e.preventDefault();
+            alert("Nama wajib diisi!");
+          }
+        }}
       >
         Pesan Sekarang
         <svg

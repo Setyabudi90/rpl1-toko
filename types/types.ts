@@ -5,6 +5,7 @@ export interface Dish {
   image: string;
   price: string;
   star: number;
+  detail?: string;
 }
 
 export interface Data {
