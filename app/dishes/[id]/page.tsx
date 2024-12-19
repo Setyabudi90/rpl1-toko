@@ -12,6 +12,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
   const [kelas, setKelas] = useState<string>("");
+  const [porsi, setPorsi] = useState<number>(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -51,8 +52,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   }
 
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  // Generate stars
   const renderStars = (starCount: number) => {
     const stars = [];
     for (let i = 0; i < starCount; i++) {
@@ -117,12 +116,22 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           onChange={(e) => setKelas(e.target.value)}
           className="p-2 border rounded-md text-white bg-transparent"
         />
+        <input
+          type="number"
+          placeholder="Berapa Porsi"
+          onChange={(e) => setPorsi(parseInt(e.target.value))}
+          className="p-2 border rounded-md text-white bg-transparent"
+        />
       </div>
       <Link
         href={`https://wa.me/6281357379636?text=${encodeURIComponent(
-          `Halo! Saya ingin membeli ${dish.name} dengan harga ${
-            dish.price
-          }.\nNama: ${name}\nKelas: ${kelas || "-"}`
+          `Halo! Saya ingin membeli ${dish.name} ${porsi} porsi dengan harga *${
+            porsi >= 2
+              ? `Rp. ${String(
+                  parseInt(dish.price.replace(/[^0-9]/g, "")) * porsi
+                )}`
+              : dish.price
+          }.*\n*Nama*: *${name}*\n*Kelas*: *${kelas || "-"}*`
         )}`}
         target="_blank"
         rel="noopener noreferrer"
