@@ -106,7 +106,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           placeholder="Nama (Required)"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="p-2 border rounded-md text-white bg-transparent"
+          className="p-2 border rounded-md dark:text-white bg-transparent text-black"
           required
         />
         <input
@@ -114,13 +114,13 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           placeholder="Kelas (Optional) Kosongkan ndak papa"
           value={kelas}
           onChange={(e) => setKelas(e.target.value)}
-          className="p-2 border rounded-md text-white bg-transparent"
+          className="p-2 border rounded-md dark:text-white text-black bg-transparent"
         />
         <input
           type="number"
           placeholder="Berapa Porsi"
           onChange={(e) => setPorsi(parseInt(e.target.value))}
-          className="p-2 border rounded-md text-white bg-transparent"
+          className="p-2 border rounded-md dark:text-white text-black bg-transparent"
         />
       </div>
       <Link
